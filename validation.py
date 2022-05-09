@@ -1,4 +1,5 @@
 from dummy_validator import DummyValidator
+from another_dummy_validator import AnotherDummyValidator
 
 def validateName(name):
     if not name.isalpha():
@@ -43,11 +44,16 @@ def validate_and_print():
         print(f"* {name}\n* {age}\n* {passwd}\n* {zip}")
 
 if __name__ == '__main__':
-    #first try
+    #first try with functions
     validate_and_print()
 
-    #second try
+    #second try with class object
     validator = DummyValidator()
     validator.validate_and_print()
+
+    #third try with two classess
+    next_validator = AnotherDummyValidator()
+    next_validator.validate_data()
+    next_validator.print_data()
 
 
