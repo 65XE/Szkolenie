@@ -75,8 +75,3 @@ class DummyValidator:
                 break
 
             self.__print_validated_data()
-
-
-if __name__ == '__main__':
-    validator = DummyValidator()
-    validator.validate_and_print()

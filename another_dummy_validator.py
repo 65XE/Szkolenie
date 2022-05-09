@@ -69,9 +69,3 @@ class AnotherDummyValidator:
             person = Person(name, age, passwd, zip)
             self.__persons.append(person)
             print('\n')
-
-
-if __name__ == '__main__':
-    validator = AnotherDummyValidator()
-    validator.validate_data()
-    validator.print_data()
