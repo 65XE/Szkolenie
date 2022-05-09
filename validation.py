@@ -1,3 +1,5 @@
+from dummy_validator import DummyValidator
+
 def validateName(name):
     if not name.isalpha():
         return False
@@ -20,7 +22,7 @@ def validateZipCode(zip):
         return False
     return True
 
-def validate():
+def validate_and_print():
     while True:
         name = input("Podaj imię : ")
         if not validateName(name):
@@ -40,4 +42,12 @@ def validate():
 
         print(f"* {name}\n* {age}\n* {passwd}\n* {zip}")
 
-validate()
+if __name__ == '__main__':
+    #first try
+    validate_and_print()
+
+    #second try
+    validator = DummyValidator()
+    validator.validate_and_print()
+
+
