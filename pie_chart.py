@@ -61,7 +61,8 @@ def print_pie_chart(data, labels, title):
 
 
 def proba():
-    path = "C:\\WORK\\prywatne\\nauka\\Szkolenie Python\\Task"
+    #path = "C:\\WORK\\prywatne\\nauka\\Szkolenie Python\\Task"
+    path = "D:\development\Projects\Python\Task"
 
     passed = "<Passed>"
     failures = "<Failures>"
