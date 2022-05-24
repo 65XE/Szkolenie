@@ -108,4 +108,8 @@ if __name__ == '__main__':
 
     chart = ChartGenerator()
     labels = ['Passed', 'Failures', 'Exceptions']
-    chart.print_pie_chart(tests_counter.get_data(), labels, "Wyniki Testów")
+    chart.print_pie_chart(tests_counter.get_data(),
+                          labels,
+                          f"Passed = {tests_counter.get_data().data[0]}\n"
+                          f"Failures = {tests_counter.get_data().data[1]}\n"
+                          f"Exceptions = {tests_counter.get_data().data[2]}")
