@@ -17,6 +17,7 @@ class Person:
     def get_zip(self):
         return self.__zip
 
+
 class AnotherDummyValidator:
     def __init__(self):
         self.__persons = []
