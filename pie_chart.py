@@ -19,7 +19,6 @@ def przyklad_z_czatu():
     print(F"Rozmiar plików to {total_size} bajtów.")
     print(F"Rozmiar plików to {round(total_size * (10 ** -6))} megabajtów.")
 
-
 def return_number_in_tags(tag, line):
         if tag in line:
             s = line
@@ -39,9 +38,27 @@ def passed_count(line):
 def failures_count(line):
     return return_number_in_tags("<Failures>", line)
 
-def print_pie_chart(data, labels):
-    plt.pie(data, labels=labels)
+def print_pie_chart(data, labels, title):
+    fig, ax = plt.subplots(figsize=(6, 6))
+    ax.pie(data, labels=labels, autopct='%.1f%%',
+           wedgeprops={'linewidth': 3.0, 'edgecolor': 'white'},
+           textprops={'size': 'x-large'})
+    ax.set_title(title, fontsize=18)
+    plt.tight_layout()
     plt.show()
+
+# def test_pie():
+#     fig, ax = plt.subplots(figsize=(6, 6))
+#
+#     x = [10, 50, 30, 20]
+#     labels = ['Passed', 'Failures', 'Exceptions', 'Warnings']
+#     ax.pie(x, labels=labels, autopct='%.1f%%',
+#            wedgeprops={'linewidth': 3.0, 'edgecolor': 'white'},
+#            textprops={'size': 'x-large'})
+#     ax.set_title('Sport Popularity', fontsize=18)
+#     plt.tight_layout()
+#     plt.show()
+
 
 def proba():
     path = "C:\\WORK\\prywatne\\nauka\\Szkolenie Python\\Task"
@@ -78,7 +95,7 @@ def proba():
 
     data = np.array([passed_no, failures_no, exceptions_no])
     labels = ['Passed', 'Failures', 'Exceptions']
-    print_pie_chart(data, labels)
+    print_pie_chart(data, labels, "Wyniki Testów")
 
 if __name__ == '__main__':
     print(f"Poczatek")
