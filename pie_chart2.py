@@ -45,7 +45,8 @@ class TestsCounter:
             self.__exceptions_no = excep
             self.__total_files = t_files
 
-    def __init__(self):
+    def __init__(self, path):
+        self.__path = path
         self.__passed = "<Passed>"
         self.__failures = "<Failures>"
         self.__exceptions = "<Exceptions>"
@@ -69,12 +70,12 @@ class TestsCounter:
     def __failures_count(self, line):
         return self.__return_number_in_tags("<Failures>", line)
 
-    def runner(self, path):
+    def run(self):
         passed_no = 0
         failures_no = 0
         exceptions_no = 0
         total_files = 0
-        for dir_path, _, files in os.walk(path):
+        for dir_path, _, files in os.walk(self.__path):
             for name in files:
                 if not name.startswith("LOG_") or not name.endswith(".xml"):
                     continue
@@ -103,8 +104,8 @@ class TestsCounter:
 if __name__ == '__main__':
     print(f"Poczatek")
 
-    tests_counter = TestsCounter()
-    tests_counter.runner("D:\development\Projects\Python\Task")
+    tests_counter = TestsCounter("D:\development\Projects\Python\Task")
+    tests_counter.run()
     tests_counter.print_summary()
 
     chart = ChartGenerator()
