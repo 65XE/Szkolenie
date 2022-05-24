@@ -102,8 +102,6 @@ class TestsCounter:
 
 
 if __name__ == '__main__':
-    print(f"Poczatek")
-
     tests_counter = TestsCounter("D:\development\Projects\Python\Task")
     tests_counter.run()
     tests_counter.print_summary()
