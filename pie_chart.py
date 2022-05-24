@@ -39,6 +39,10 @@ def passed_count(line):
 def failures_count(line):
     return return_number_in_tags("<Failures>", line)
 
+def print_pie_chart(data, labels):
+    plt.pie(data, labels=labels)
+    plt.show()
+
 def proba():
     path = "C:\\WORK\\prywatne\\nauka\\Szkolenie Python\\Task"
 
@@ -67,17 +71,14 @@ def proba():
 
             total_files += 1
 
-    print(F"Liczba plików .xml to {total_files}")
-    print(f"Liczba Pass : {passed_no}")
+    print(F"Liczba plików LOG*.xml które sprawdzam to:  {total_files}")
+    print(f"Liczba Passów : {passed_no}")
     print(f"Liczba Faili : {failures_no}")
     print(f"Liczba Exceptionów : {exceptions_no}")
 
-    y = np.array([passed_no, failures_no, exceptions_no])
-
-    plt.pie(y)
-    plt.show()
-    #print(F"Rozmiar plików to {total_size} bajtów.")
-    #print(F"Rozmiar plików to {round(total_size * (10 ** -6))} megabajtów.")
+    data = np.array([passed_no, failures_no, exceptions_no])
+    labels = ['Passed', 'Failures', 'Exceptions']
+    print_pie_chart(data, labels)
 
 if __name__ == '__main__':
     print(f"Poczatek")
