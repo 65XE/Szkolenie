@@ -11,13 +11,16 @@ class ChartGenerator:
 
     def print_pie_chart(self, data, labels, title):
         fig, ax = plt.subplots(figsize=(6, 6))
-        ax.pie(data, labels=labels, autopct='%.1f%%',
+        pie_colors = ['tab:green', 'tab:orange', 'tab:red']
+        ax.pie(data, labels=labels, colors=pie_colors, autopct='%.1f%%',
                wedgeprops={'linewidth': 3.0, 'edgecolor': 'white'},
                textprops={'size': 'x-large'})
         ax.set_title(title, fontsize=18)
+        label = [f"Passed : {data[0]}", f"Failures : {data[1]}", f"Exceptions : {data[2]}"]
+        plt.legend(labels=label, loc='upper center',
+                   bbox_to_anchor=(0.5, -0.04), ncol=2)
         plt.tight_layout()
         plt.show()
-
 
 class TestsCounter:
     class DataContainer:
@@ -108,8 +111,4 @@ if __name__ == '__main__':
 
     chart = ChartGenerator()
     labels = ['Passed', 'Failures', 'Exceptions']
-    chart.print_pie_chart(tests_counter.get_data(),
-                          labels,
-                          f"Passed = {tests_counter.get_data().data[0]}\n"
-                          f"Failures = {tests_counter.get_data().data[1]}\n"
-                          f"Exceptions = {tests_counter.get_data().data[2]}")
+    chart.print_pie_chart(tests_counter.get_data(), labels, "Wyniki Testów")
