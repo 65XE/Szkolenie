@@ -1,14 +1,7 @@
-import csv
-import json
-
-
-#wygeneruj raport z egzekucji testow
-#2 formaty
-
-
-
 import matplotlib.pyplot as plt
 import numpy as np
+import csv
+import json
 import os
 
 class ChartGenerator:
@@ -124,7 +117,7 @@ class ReportGenerator:
     def __create_dict(self):
         keys = ('Passed', 'Failures', 'Exceptions')
         values = (self.__data[0], self.__data[1], self.__data[2])
-        return dict(zip(keys,values))
+        return dict(zip(keys, values))
 
     def __json_generator(self):
         data = self.__create_dict()
@@ -147,38 +140,30 @@ class ReportGenerator:
                 self.__json_generator()
             case "2":
                 self.__csv_generator()
+            case "3":
+                self.__json_generator()
+                self.__csv_generator()
             case _:
-                print("This is not 1 or 2. Program will terminate.")
+                print("This is not 1 or 2. There will be no reports.")
 
     def generate(self):
         print(f"Hi,\nPlease specify in which file format you want to generate file?\n"
-              f"Press 1 for JSON\nPress 2 for CSV")
+              f"Press 1 for JSON\nPress 2 for CSV\nPress 3 for both")
         format = input("Please enter the number : ")
         self.__choose_format(format)
 
 
 if __name__ == '__main__':
+    #tests counting
     tests_counter = TestsCounter(r"D:\development\Projects\Python\Task")#os.path.join
     tests_counter.run()
     tests_counter.print_summary()
-
-
 
     #generate report
     report = ReportGenerator(tests_counter.get_data_for_report())
     report.generate()
 
-    # chart = ChartGenerator()
-    # labels = ['Passed', 'Failures', 'Exceptions']
-    # chart.print_pie_chart(tests_counter.get_data_for_chart(), labels, "Wyniki Testów")
-
-
-
-#
-# #1. csv
-# villains = [
-#     ['']
-# ]
-#
-# null NULL Null
-# #2
+    #chart visualization
+    #chart = ChartGenerator()
+    #labels = ['Passed', 'Failures', 'Exceptions']
+    #chart.print_pie_chart(tests_counter.get_data_for_chart(), labels, "Wyniki Testów")
