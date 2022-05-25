@@ -1,27 +1,5 @@
-import matplotlib.pyplot as plt
 import numpy as np
 import os
-
-
-class ChartGenerator:
-    def __init(self, data=[], labels=[], title=""):
-        self.__data = data
-        self.__labels = labels
-        self.__title = title
-
-    def print_pie_chart(self, data, labels, title):
-        fig, ax = plt.subplots(figsize=(6, 6))
-        pie_colors = ['tab:green', 'tab:orange', 'tab:red']
-        ax.pie(data, labels=labels, colors=pie_colors, autopct='%.1f%%',
-               wedgeprops={'linewidth': 3.0, 'edgecolor': 'white'},
-               textprops={'size': 'x-large'})
-        ax.set_title(title, fontsize=18)
-        label = [f"Passed : {data[0]}", f"Failures : {data[1]}", f"Exceptions : {data[2]}"]
-        plt.legend(labels=label, loc='upper center',
-                   bbox_to_anchor=(0.5, -0.04), ncol=2)
-        plt.tight_layout()
-        plt.show()
-
 
 class TestsCounter:
     class DataContainer:
@@ -101,15 +79,8 @@ class TestsCounter:
         print(f"Liczba Faili : {self.__data.get_failures()}")
         print(f"Liczba Exceptionów : {self.__data.get_exceptions()}")
 
-    def get_data(self):
+    def get_data_for_chart(self):
         return np.array([self.__data.get_passed(), self.__data.get_failures(), self.__data.get_exceptions()])
 
-
-if __name__ == '__main__':
-    tests_counter = TestsCounter(r"D:\development\Projects\Python\Task")#os.path.join
-    tests_counter.run()
-    tests_counter.print_summary()
-
-    chart = ChartGenerator()
-    labels = ['Passed', 'Failures', 'Exceptions']
-    chart.print_pie_chart(tests_counter.get_data(), labels, "Wyniki Testów")
+    def get_data_for_report(self):
+        return [self.__data.get_passed(), self.__data.get_failures(), self.__data.get_exceptions()]
