@@ -1,7 +1,15 @@
+import csv
+import json
+
+
+#wygeneruj raport z egzekucji testow
+#2 formaty
+
+
+
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-
 
 class ChartGenerator:
     def __init(self, data=[], labels=[], title=""):
@@ -101,8 +109,52 @@ class TestsCounter:
         print(f"Liczba Faili : {self.__data.get_failures()}")
         print(f"Liczba Exceptionów : {self.__data.get_exceptions()}")
 
-    def get_data(self):
+    def get_data_for_chart(self):
         return np.array([self.__data.get_passed(), self.__data.get_failures(), self.__data.get_exceptions()])
+
+    def get_data_for_report(self):
+        #data = [self.__data.get_passed(), self.__data.get_failures(), self.__data.get_exceptions()]
+        return [self.__data.get_passed(), self.__data.get_failures(), self.__data.get_exceptions()]
+
+
+class ReportGenerator:
+    def __init__(self, data):
+        self.__data = data
+
+    def __create_dict(self):
+        keys = ('Passed', 'Failures', 'Exceptions')
+        values = (self.__data[0], self.__data[1], self.__data[2])
+        return dict(zip(keys,values))
+
+    def __json_generator(self):
+        data = self.__create_dict()
+
+        with open('report.json', 'wt', encoding='UTF8') as fout:
+            json.dump(data, fout)
+
+
+    def __csv_generator(self):
+        header = ['Passed', 'Failures', 'Exceptions']
+
+        with open('report.csv', 'wt', encoding='UTF8') as fout:
+            csvout = csv.writer(fout)
+            csvout.writerow(header)
+            csvout.writerow(self.__data)
+
+    def __choose_format(self, format):
+        match format:
+            case "1":
+                self.__json_generator()
+            case "2":
+                self.__csv_generator()
+            case _:
+                print("This is not 1 or 2. Program will terminate.")
+
+    def generate(self):
+        print(f"Hi,\nPlease specify in which file format you want to generate file?\n"
+              f"Press 1 for JSON\nPress 2 for CSV")
+        format = input("Please enter the number : ")
+        self.__choose_format(format)
 
 
 if __name__ == '__main__':
@@ -110,6 +162,23 @@ if __name__ == '__main__':
     tests_counter.run()
     tests_counter.print_summary()
 
-    chart = ChartGenerator()
-    labels = ['Passed', 'Failures', 'Exceptions']
-    chart.print_pie_chart(tests_counter.get_data(), labels, "Wyniki Testów")
+
+
+    #generate report
+    report = ReportGenerator(tests_counter.get_data_for_report())
+    report.generate()
+
+    # chart = ChartGenerator()
+    # labels = ['Passed', 'Failures', 'Exceptions']
+    # chart.print_pie_chart(tests_counter.get_data_for_chart(), labels, "Wyniki Testów")
+
+
+
+#
+# #1. csv
+# villains = [
+#     ['']
+# ]
+#
+# null NULL Null
+# #2
