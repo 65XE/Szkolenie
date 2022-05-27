@@ -48,11 +48,13 @@ class ReportGenerator:
             case "3":
                 return self.__both_generators
             case _:
-                print("This is not 1 or 2. There will be no reports.")
+                print("This is not 1, nor 2 or even 3. There will be no reports.")
+                return False
 
     def generate(self, report):
         print(f"Hi,\nPlease specify in which file format you want to generate file?\n"
               f"Press 1 for JSON\nPress 2 for CSV\nPress 3 for both")
         formatting = input("Please enter the number : ")
         generator = self.__choose_format(formatting)
-        return generator(report)
+        if generator != False:
+            return generator(report)

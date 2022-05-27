@@ -5,7 +5,7 @@ from consts_and_enums import CONSTANTS
 
 if __name__ == '__main__':
     # tests counting
-    tests_counter = TestsCounter(r"D:\development\Projects\Python\Task")#os.path.join
+    tests_counter = TestsCounter(r"D:\development\Projects\Python\Task")
     tests_counter.run()
     tests_counter.print_summary()
 
