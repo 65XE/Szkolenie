@@ -9,8 +9,7 @@ class TestsCounter:
         self.__path = path
         self.__data = []
 
-    @staticmethod
-    def __return_number_in_tags(tag, line):
+    def __return_number_in_tags(self, tag, line):
         if tag in line:
             s = line
             res = s.find(">")

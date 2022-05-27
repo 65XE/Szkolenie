@@ -9,8 +9,7 @@ class ChartGenerator:
         self.__labels = labels
         self.__title = title
 
-    @staticmethod
-    def __check_if_small(data, labels):
+    def __check_if_small(self, data, labels):
         all = 0
         ctr = 0
         for i in data:
