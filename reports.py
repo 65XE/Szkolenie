@@ -8,8 +8,6 @@ if __name__ == '__main__':
     tests_counter.print_summary()
 
     #generate report
-    # report = ReportGenerator(tests_counter.get_data_for_report())
-    # report.generate()
-    report = tests_counter.get_data_for_report()
+    report = tests_counter.get_data()
     report_generator = ReportGenerator()
     report_generator.generate(report)

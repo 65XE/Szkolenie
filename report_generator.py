@@ -1,26 +1,34 @@
+from consts_and_enums import CONSTANTS
+from consts_and_enums import Status
 import csv
 import json
 
 
-class Report:
-    def __init__(self, data):
-        self.data = data
+# class Report:
+#     def __init__(self, data):
+#         self.data = data
 
 
 class ReportGenerator:
     def __create_dict(self, data):
-        keys = ('Passed', 'Failures', 'Exceptions')
-        values = (data[0], data[1], data[2])
+        keys = (CONSTANTS.PASSED, CONSTANTS.FAILURES, CONSTANTS.EXCEPTIONS,
+                CONSTANTS.WARNINGS, CONSTANTS.SKIPPED, CONSTANTS.BLOCKED,
+                CONSTANTS.WORKAROUNDS)
+        values = (data[Status.PASSED], data[Status.FAILURES], data[Status.EXCEPTIONS],
+                  data[Status.WARNINGS], data[Status.SKIPPED], data[Status.BLOCKED],
+                  data[Status.WORKAROUNDS])
         return dict(zip(keys, values))
 
     def __json_generator(self, data):
-        dict = self.__create_dict(data)
+        diction = self.__create_dict(data)
 
         with open('report.json', 'wt', encoding='UTF8') as fout:
-            json.dump(dict, fout)
+            json.dump(diction, fout)
 
     def __csv_generator(self, data):
-        header = ['Passed', 'Failures', 'Exceptions']
+        header = [CONSTANTS.PASSED, CONSTANTS.FAILURES, CONSTANTS.EXCEPTIONS,
+                  CONSTANTS.WARNINGS, CONSTANTS.SKIPPED, CONSTANTS.BLOCKED,
+                  CONSTANTS.WORKAROUNDS]
 
         with open('report.csv', 'wt', encoding='UTF8') as fout:
             csvout = csv.writer(fout)
@@ -45,6 +53,6 @@ class ReportGenerator:
     def generate(self, report):
         print(f"Hi,\nPlease specify in which file format you want to generate file?\n"
               f"Press 1 for JSON\nPress 2 for CSV\nPress 3 for both")
-        format = input("Please enter the number : ")
-        generator = self.__choose_format(format)
+        formatting = input("Please enter the number : ")
+        generator = self.__choose_format(formatting)
         return generator(report)
